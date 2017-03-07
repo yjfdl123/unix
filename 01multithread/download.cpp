@@ -9,20 +9,20 @@ sem_t sem;
 void* downloader(void* data)
 {
     if (sem_wait(&sem) == 0){
-        printf("tid:%d\t begin\n",pthread_self());
-        sleep(3);
-        printf("tid:%d\t end\n",pthread_self());
+        printf("tid:%ld\t begin\n",pthread_self());
+        sleep(5);
+        printf("tid:%ld\t end\n",pthread_self());
         sem_post(&sem); 
     }else{
-        printf("tid:%d\t fail\n",pthread_self());
+        printf("tid:%ld\t fail\n",pthread_self());
     }
     return (void*)0;
 }
 void control_download()
 {
-    int tnum=10;
-    int maxdnum = 3;
-    if (sem_init(&sem, 0, 10)==0){
+    int tnum=5;
+    int maxdnum = 2;
+    if (sem_init(&sem, 0, maxdnum)==0){
         cout<<"succ"<<endl;
     }else{
         cout<<"fail"<<endl;
